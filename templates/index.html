@@ -64,9 +64,17 @@
 
     </div>
 
+    <div class="text-center mb-4">
+
+        <h5>📅 Current Date & Time</h5>
+
+        <p id="datetime"></p>
+
+    </div>
+
     <div class="card p-4">
 
-        <form method="POST">
+        <form method="POST" onsubmit="showLoader()">
 
             <div class="mb-3">
 
@@ -135,6 +143,16 @@
 
             </button>
 
+            <div id="loader" class="text-center mt-3" style="display:none;">
+
+                <div class="spinner-border text-primary"></div>
+
+                <p class="mt-2">
+                    Generating Password...
+                </p>
+
+            </div>
+
         </form>
 
     </div>
@@ -191,6 +209,30 @@
 
     {% endif %}
 
+    {% if history %}
+
+    <div class="card mt-4 p-4">
+
+        <h3 class="mb-3">
+            🕒 Password History
+        </h3>
+
+        <ul class="list-group">
+
+            {% for item in history %}
+
+            <li class="list-group-item">
+                {{ item }}
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
 </div>
 
 <footer class="text-center mt-5 mb-3 text-muted">
@@ -215,6 +257,25 @@ function copyPassword(){
     alert("Password Copied!");
 
 }
+
+function showLoader(){
+
+    document.getElementById("loader").style.display = "block";
+
+}
+
+function updateDateTime(){
+
+    const now = new Date();
+
+    document.getElementById("datetime").innerHTML =
+        now.toLocaleString();
+
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
 
 </script>
 

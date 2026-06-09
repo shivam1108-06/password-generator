@@ -4,6 +4,8 @@ import string
 
 app = Flask(__name__)
 
+history = []
+
 @app.route("/", methods=["GET", "POST"])
 def home():
 
@@ -29,18 +31,35 @@ def home():
             random.choice(characters)
             for _ in range(length)
         )
-        strength = "Weak"
+
+        history.append(password)
+
+        score = 0
 
         if length >= 8:
-            strength = "Medium"
+            score += 1
 
-        if length >= 12:
+        if "uppercase" in request.form:
+            score += 1
+
+        if "numbers" in request.form:
+            score += 1
+
+        if "symbols" in request.form:
+            score += 1
+
+        if score <= 2:
+            strength = "Weak"
+        elif score == 3:
+            strength = "Medium"
+        else:
             strength = "Strong"
 
     return render_template(
         "index.html",
         password=password,
-        strength=strength
+        strength=strength,
+        history=history
     )
 
 if __name__ == "__main__":
