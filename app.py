@@ -13,7 +13,16 @@ def home():
 
         length = int(request.form["length"])
 
-        characters = string.ascii_letters + string.digits + string.punctuation
+        characters = string.ascii_lowercase
+
+        if "uppercase" in request.form:
+            characters += string.ascii_uppercase
+
+        if "numbers" in request.form:
+            characters += string.digits
+
+        if "symbols" in request.form:
+            characters += string.punctuation
 
         password = "".join(
             random.choice(characters)
