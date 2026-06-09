@@ -38,6 +38,20 @@
     </style>
 
 </head>
+<script>
+
+function copyPassword(){
+
+    let password =
+        document.getElementById("passwordText").innerText;
+
+    navigator.clipboard.writeText(password);
+
+    alert("Password Copied!");
+
+}
+
+</script>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
@@ -95,21 +109,33 @@
 
         </form>
 
-        {% if password %}
+       {% if password %}
 
-        <div class="alert alert-success mt-4">
+<div class="card mt-4 p-4 text-center">
 
-            <h4>
-                Generated Password
-            </h4>
+    <h3>
+        🔐 Generated Password
+    </h3>
 
-            <h3>
-                {{ password }}
-            </h3>
+    <div class="alert alert-success mt-3">
 
-        </div>
+        <h4 id="passwordText">
+            {{ password }}
+        </h4>
 
-        {% endif %}
+    </div>
+
+    <button
+        class="btn btn-success"
+        onclick="copyPassword()">
+
+        📋 Copy Password
+
+    </button>
+
+</div>
+
+{% endif %}
 
         <div class="form-check">
 
