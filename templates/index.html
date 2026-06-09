@@ -38,20 +38,6 @@
     </style>
 
 </head>
-<script>
-
-function copyPassword(){
-
-    let password =
-        document.getElementById("passwordText").innerText;
-
-    navigator.clipboard.writeText(password);
-
-    alert("Password Copied!");
-
-}
-
-</script>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
@@ -99,6 +85,48 @@ function copyPassword(){
 
             </div>
 
+            <div class="form-check">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="uppercase"
+                    checked>
+
+                <label class="form-check-label">
+                    Uppercase Letters (A-Z)
+                </label>
+
+            </div>
+
+            <div class="form-check">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="numbers"
+                    checked>
+
+                <label class="form-check-label">
+                    Numbers (0-9)
+                </label>
+
+            </div>
+
+            <div class="form-check mb-3">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="symbols"
+                    checked>
+
+                <label class="form-check-label">
+                    Symbols (!@#$%)
+                </label>
+
+            </div>
+
             <button
                 type="submit"
                 class="btn btn-primary w-100">
@@ -109,77 +137,59 @@ function copyPassword(){
 
         </form>
 
-       {% if password %}
+    </div>
 
-<div class="card mt-4 p-4 text-center">
+    {% if password %}
 
-    <h3>
-        🔐 Generated Password
-    </h3>
+    <div class="card mt-4 p-4 text-center">
 
-    <div class="alert alert-success mt-3">
+        <h3>
+            🔐 Generated Password
+        </h3>
 
-        <h4 id="passwordText">
-            {{ password }}
-        </h4>
+        <div class="alert alert-success mt-3">
+
+            <h4 id="passwordText">
+                {{ password }}
+            </h4>
+
+        </div>
+
+        <button
+            class="btn btn-success"
+            onclick="copyPassword()">
+
+            📋 Copy Password
+
+        </button>
+
+        <div class="mt-3">
+
+            {% if strength == "Weak" %}
+
+            <span class="badge bg-danger fs-6">
+                Weak Password
+            </span>
+
+            {% elif strength == "Medium" %}
+
+            <span class="badge bg-warning text-dark fs-6">
+                Medium Password
+            </span>
+
+            {% else %}
+
+            <span class="badge bg-success fs-6">
+                Strong Password
+            </span>
+
+            {% endif %}
+
+        </div>
 
     </div>
 
-    <button
-        class="btn btn-success"
-        onclick="copyPassword()">
-
-        📋 Copy Password
-
-    </button>
-
-</div>
-
-{% endif %}
-
-        <div class="form-check">
-
-    <input
-        class="form-check-input"
-        type="checkbox"
-        name="uppercase"
-        checked>
-
-    <label class="form-check-label">
-        Uppercase Letters (A-Z)
-    </label>
-
-</div>
-
-<div class="form-check">
-
-    <input
-        class="form-check-input"
-        type="checkbox"
-        name="numbers"
-        checked>
-
-    <label class="form-check-label">
-        Numbers (0-9)
-    </label>
-
-</div>
-
-<div class="form-check mb-3">
-
-    <input
-        class="form-check-input"
-        type="checkbox"
-        name="symbols"
-        checked>
-
-    <label class="form-check-label">
-        Symbols (!@#$%)
-    </label>
-
-</div>
-
-    </div>
+    {% endif %}
 
 </div>
 
@@ -192,6 +202,21 @@ function copyPassword(){
     </p>
 
 </footer>
+
+<script>
+
+function copyPassword(){
+
+    let password =
+        document.getElementById("passwordText").innerText;
+
+    navigator.clipboard.writeText(password);
+
+    alert("Password Copied!");
+
+}
+
+</script>
 
 </body>
 </html>

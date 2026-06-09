@@ -8,6 +8,7 @@ app = Flask(__name__)
 def home():
 
     password = None
+    strength = None
 
     if request.method == "POST":
 
@@ -28,10 +29,18 @@ def home():
             random.choice(characters)
             for _ in range(length)
         )
+        strength = "Weak"
+
+        if length >= 8:
+            strength = "Medium"
+
+        if length >= 12:
+            strength = "Strong"
 
     return render_template(
         "index.html",
-        password=password
+        password=password,
+        strength=strength
     )
 
 if __name__ == "__main__":
