@@ -66,7 +66,7 @@
 
     <div class="card p-4">
 
-        <form>
+        <form method="POST">
 
             <div class="mb-3">
 
@@ -76,12 +76,17 @@
 
                 <input
                     type="number"
+                    name="length"
                     class="form-control"
-                    placeholder="Enter Length">
+                    placeholder="Enter Length"
+                    min="4"
+                    max="50"
+                    required>
 
             </div>
 
             <button
+                type="submit"
                 class="btn btn-primary w-100">
 
                 Generate Password
@@ -89,6 +94,22 @@
             </button>
 
         </form>
+
+        {% if password %}
+
+        <div class="alert alert-success mt-4">
+
+            <h4>
+                Generated Password
+            </h4>
+
+            <h3>
+                {{ password }}
+            </h3>
+
+        </div>
+
+        {% endif %}
 
     </div>
 
